@@ -26,3 +26,4 @@ walter@fsw:~$ nano /etc/mysql/mariadb.conf.d/50-server.cnf
 
 walter@fsw:~$ exit
 walter@fsw:~$ service mysql restart
+walter@fsw:~$ netstat -tupan | grep mysql
