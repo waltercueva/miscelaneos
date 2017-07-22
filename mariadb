@@ -1,0 +1,13 @@
+#####Resetear contraseña de root #######
+walter@fsw:~$ /etc/init.d/mysql stop
+walter@fsw:~$ /usr/bin/mysqld_safe --skip-grant-tables &
+walter@fsw:~$ mysql --user=root mysql
+
+mysql> update user set Password=PASSWORD('nuevo-password') WHERE User='root';
+mysql> flush privileges;
+mysql> exit
+
+walter@fsw:~$ /etc/init.d/mysql start
+walter@fsw:~$ mysql --user=root --pass=nuevo-password
+
+mysql> exit
