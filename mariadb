@@ -11,3 +11,18 @@ walter@fsw:~$ /etc/init.d/mysql start
 walter@fsw:~$ mysql --user=root --pass=nuevo-password
 
 mysql> exit
+
+
+
+####Crear un usuario administrador para usar con phpmyadmin##############
+walter@fsw:~$ mysql -u root
+
+mysql> CREATE USER 'nuevo_usuario'@'localhost' IDENTIFIED BY 'password';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'nuevo_usuario'@'localhost';
+mysql> FLUSH PRIVILEGES;
+
+walter@fsw:~$ nano /etc/mysql/mariadb.conf.d/50-server.cnf
+#bind-address = 127.0.0.1 
+
+walter@fsw:~$ exit
+walter@fsw:~$ service mysql restart
