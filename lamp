@@ -1,0 +1,88 @@
+# Actualizacion de paquetes desde repositorio
+apt-get update
+apt-get upgrade
+apt-get dist-upgrade
+#cambio de host
+hostnamectl set-hostname pc01.adminfo.net
+
+#utilitarios
+apt install net-tools sudo wget curl bash-completion
+
+#instalacion de servidor apache2
+apt install apache2
+
+#lenguaje de programacion
+apt install libapache2-mod-php7.0 php7.0 php7.0-gd php7.0-xml php7.0-curl php7.0-mbstring php7.0-mcrypt php7.0-xmlrpc
+
+#base de datos
+apt install php7.0-mysql mariadb-server mariadb-client
+
+#inicio de servicio bd
+systemctl start mariadb
+
+mysql_secure_installation # dar si a todo
+
+#restringir acceso a usuario root
+mysql –u root
+
+MariaDB> use mysql;
+MariaDB> update user set plugin='' where User='root';
+MariaDB> flush privilges;
+MariaDB> quit
+
+#volver a probar acceso
+mysql –u root
+
+#configuracion avanzada del servidor web
+a2enmod rewrite ssl
+a2ensite default-ssl.conf
+
+#En los archivos de configuracion:
+nano /etc/apache2/sites-enabled/000-default.conf
+
+nano /etc/apache2/sites-enabled/default-ssl.conf
+
+#agregar
+    <Directory /var/www/html>
+       Options Indexes FollowSymLinks MultiViews
+       AllowOverride All
+       Require all granted
+    </Directory>
+
+# en apache-ssl.conf, añadir despues </Directory> 
+
+SSLProtocol all -SSLv2 -SSLv3
+# Add SSL Cipher in one long line
+SSLCipherSuite          ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
+SSLHonorCipherOrder     on
+SSLOptions +StrictRequire
+ 
+Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+
+
+#agregar modulo headers
+
+a2enmod headers
+
+systemctl restart apache2.service
+
+#reinicio de servicios
+apachectl –t
+
+systemctl restart apache2.service mariadb.service
+
+systemctl enable apache2.service mariadb.service
+
+#comprobando servicio
+netstat -tlp| egrep 'http|mysql'
+#comprobando website https://www.adminfo.net 
+
+
+#creando bd
+mysql –u root -p
+
+CREATE DATABASE basededatos;
+GRANT ALL PRIVILEGES ON basededatos.* TO 'usuario-basededatos'@'localhost' IDENTIFIED BY 'contraseña';
+FLUSH PRIVILEGES;
