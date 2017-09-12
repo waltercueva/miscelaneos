@@ -2,3 +2,5 @@
 mysql-ctl install
 phpmyadmin-ctl install
 mysql-ctl start
+
+SET PASSWORD FOR 'usuario'@'%' = PASSWORD('nuevopassword');
