@@ -3,5 +3,7 @@ mysql-ctl install
 phpmyadmin-ctl install
 mysql-ctl start
 
+https://[workspacename]-[username].c9users.io/phpmyadmin.
+
 SET PASSWORD FOR 'usuario'@'%' = PASSWORD('nuevopassword');
 mysql -u usuario -p
