@@ -1,4 +1,4 @@
 en sources.list agregar
 deb http://ftp.es.debian.org/debian/sid main
-
+aptitude update
 aptitude install r-base
