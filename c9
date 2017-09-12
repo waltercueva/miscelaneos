@@ -7,3 +7,7 @@ https://[workspacename]-[username].c9users.io/phpmyadmin.
 
 SET PASSWORD FOR 'usuario'@'%' = PASSWORD('nuevopassword');
 mysql -u usuario -p
+
+
+#documentacion
+https://docs.phpmyadmin.net/es/latest/
