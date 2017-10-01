@@ -1,4 +1,4 @@
-# Instalacion de Paquetes de versión determinada
+# Instalación de Paquetes de versión determinada
 ## Forma 1
 >require(devtools)
 
