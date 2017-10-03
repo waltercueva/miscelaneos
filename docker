@@ -1,0 +1,3 @@
+
+
+docker run -i -t --entrypoint="/bin/sh" --privileged -p 127.0.0.1:12345:85 nauxuron/domjudge-domserver -c bash
