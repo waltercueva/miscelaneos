@@ -1,3 +1,18 @@
 
 
 docker run -i -t --entrypoint="/bin/sh" --privileged -p 127.0.0.1:12345:85 nauxuron/domjudge-domserver -c bash
+
+
+#################################Script para login maquina docker##############################3
+clear 
+echo "Listando contenedores docker"
+echo 
+docker ps -a | grep Up |  awk ' { print $1,"   " $NF}' 
+echo 
+echo 
+## Insertar el Identificador o nombre de container
+echo "Insertar el Identificador o nombre de container"
+read CONTAINER
+ct=$CONTAINER && sudo nsenter --target $(docker inspect --format {{.State.Pid}} $ct) --moun --uts --ipc --net --pid
+
+
