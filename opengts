@@ -1,0 +1,10 @@
+#descargar opengts
+docker pull mcsaky/opengts-devel
+
+#ejecutarlos en una terminal en puerto 90
+docker run -it -p 90:8080 mcsaky/opengts-devel
+
+#probar en explorador
+http://localhost:90/track/Track
+usuario:sysadmin
+contraseña: en blanco
