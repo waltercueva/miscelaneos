@@ -1,0 +1,30 @@
+sudo apt-get update
+sudo apt-get install aptitude 
+sudo aptitude install gdebi-core libapparmor1
+sudo apt-get install software-properties-common
+sudo aptitude install libcurl4-openssl-dev libssl-dev 
+sudo add-apt-repository "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -sc)/"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository ppa:marutter/rdev
+sudo aptitude install 
+sudo aptitude update
+sudo aptitude install r-base r-base-core r-base-dev
+RSTUDIO_VERSION=1.1.442
+#wget http://download2.rstudio.org/rstudio-server-$RSTUDIO_VERSION-amd64.deb
+wget http://download2.rstudio.org/rstudio-server-1.1.442-amd64.deb
+# gdebi rstudio-server-$RSTUDIO_VERSION-amd64.deb
+# sudo dpkg -i rstudio-server-$RSTUDIO_VERSION-amd64.deb
+sudo dpkg -i rstudio-server-1.1.442-amd64.deb
+
+sudo groupadd rstudio
+sudo adduser --ingroup rstudio walter
+sudo touch /etc/rstudio/server
+sudo -s
+echo "www-port=8080" >> /etc/rstudio/rserver.conf
+echo "rsession-which-r=/usr/bin/R" >> /etc/rstudio/rserver.conf
+echo "server-app-armor-enabled=0" >> /etc/rstudio/rserver.conf
+echo "auth-required-user-group=analysts,admins,rstudio-users,rstudio" >> /etc/rstudio/rserver.conf
+rstudio-server verify-installation
+rstudio-server start
+#/etc/init.d/rstudio-server restart
+service rstudio-server restart
