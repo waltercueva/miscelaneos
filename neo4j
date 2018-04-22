@@ -1,0 +1,32 @@
+#instalacion del Java
+sudo apt install default-jre default-jre-headless
+#Comprueba la ejecucion del java
+java
+
+#en el caso de posibles errores con enlaces java o javac ejecutar
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+
+#Instalacion de Neo4j
+#creacion de llaves de instalacion
+wget --no-check-certificate -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
+
+#agregar repositorio
+echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee /etc/apt/sources.list.d/neo4j.list
+
+#actualizar el repositorio e instalar neo4j
+sudo apt update
+sudo apt install neo4j
+
+#para ejecutar externamente desde explorador
+
+#cambiar 
+#dbms.connector.https.address=localhost:7473
+por
+dbms.connector.https.address=0.0.0.0:7473
+
+#Reiniciar el servicio
+sudo service neo4j stop
+sudo service neo4j start
+
+#usuario y password es: neo4j 
