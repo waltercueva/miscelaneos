@@ -33,3 +33,6 @@ conda install cling xeus-cling notebook -c QuantStack -c conda-forge
 #actualizar pip
 pip install --upgrade pip
 pip install emoji --upgrade
+
+#acceder a un entorno cargado
+sudo docker exec -i -t 665b4a1e17b6 /bin/bash
