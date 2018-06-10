@@ -1,0 +1,27 @@
+### Crear un Archivo Dockerfile
+FROM jupyter/datascience-notebook
+MAINTAINER apr
+RUN pip install npm
+RUN pip install jupyterlab
+RUN jupyter serverextension enable --py jupyterlab
+
+
+### Hacer un entorno a partir del dockerfile
+docker build -t jupyterlab .
+
+* De manera intencional cambio el puerto 8080 dado que en el trabajo esta cortado el puesto 8888 :D
+
+### Ejecutar Forma1
+docker run --rm -ti -p 8080:8888 jupyterlab:latest /bin/bash
+* y en el bash correr:
+jovyan@6fde26ed0fda:~/work$ jupyter lab
+
+### Ejecutar Forma2: en una sola linea
+docker run --rm -ti -v `pwd`:/home/jovyan/work/data -p 8080:8888 jupyterlab:latest /bin/bash
+
+### Ejecutar Forma3: sin terminal interactivo
+docker run --rm -v `pwd`:/home/jovyan/work/data -p 8080:8888 jupyterlab:latest /opt/conda/bin/jupyter lab
+
+
+### Abrir en el browser
+http://direccionIP:8080
