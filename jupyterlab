@@ -25,3 +25,4 @@ docker run --rm -v `pwd`:/home/jovyan/work/data -p 8080:8888 jupyterlab:latest /
 
 ### Abrir en el browser
 http://direccionIP:8080
+
