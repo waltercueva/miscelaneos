@@ -1,0 +1,5 @@
+List all lxc container:
+> pct list
+
+Enter into a container (without password):
+> pct enter VMID
