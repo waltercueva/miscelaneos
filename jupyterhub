@@ -1,0 +1,48 @@
+JupyterHub
+################Instalar JupyterHub###############################################
+#Descargar Anaconda
+wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+
+#Instalar Anaconda
+bash Anaconda3-5.2.0-Linux-x86_64.sh -b
+
+#Instalar NodeJS
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+apt-get -y install nodejs
+
+#Instalar Java Runtime Environment
+sudo apt-get -y install default-jre
+
+#Instalar Python 3
+apt-get -y install python3-pip
+
+#Instalar configurable-http-proxy
+npm install -g configurable-http-proxy
+
+#Instalar Optimus & Spark
+pip3 install optimuspyspark
+
+
+#Instalar JupyterHub
+pip3 install jupyterhub
+
+#Actualizar notebook
+pip3 install --upgrade notebook
+
+
+mkdir /etc/jupyterhub
+jupyterhub --generate-config -f /etc/jupyterhub/jupyterhub_config.py
+
+##########Crear Usuarios###################3
+adduser walter
+
+##Modificar en /etc/jupyterhub ##
+# puerto del proxy
+c.JupyterHub.port = 80
+
+# Crear configuracion de usuarios
+c.LocalAuthenticator.create_system_users = True
+c.Authenticator.add_user_cmd = ['adduser', '--force-badname', '-q', '--gecos', '""', '--disabled-password']
+
+# Cambiar los usuarios administradores del sistema 
+c.Authenticator.admin_users = {'walter'}
