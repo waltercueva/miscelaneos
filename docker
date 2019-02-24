@@ -17,4 +17,6 @@ ct=$CONTAINER && sudo nsenter --target $(docker inspect --format {{.State.Pid}} 
 
 
 ###############################Ingresar a container como root######################3
+#docker exec -i -t {container_id/image_name} /bin/bash #sin root
 docker exec -u 0 i -t {container_id/image_name} bash
+
