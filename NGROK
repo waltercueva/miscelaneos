@@ -1,0 +1,15 @@
+wget --quiet https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+
+get_ipython().system_raw(
+    './ngrok servicio {} &'
+    .format(puerto)
+)
+
+#entrar a https://dashboard.ngrok.com/auth y configurar auth
+import getpass
+ngrok authtoken XYZ
+
+from pyngrok import ngrok
+# Abrir un tunel en el puerto determinado
+public_url = ngrok.connect(port = '80')
+print(public_url)
