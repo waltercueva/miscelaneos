@@ -27,3 +27,8 @@ walter@fsw:~$ nano /etc/mysql/mariadb.conf.d/50-server.cnf
 walter@fsw:~$ exit
 walter@fsw:~$ service mysql restart
 walter@fsw:~$ netstat -tupan | grep mysql
+
+
+#Para la version 8.0 además agregar si se desea acceder desde una red externa
+ALTER USER 'nuevo_usuario'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+#https://stackoverflow.com/questions/49194719/authentication-plugin-caching-sha2-password-cannot-be-loaded
