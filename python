@@ -1,0 +1,23 @@
+## Comprobando la version de python
+py -3 --version
+
+##connfiguración en visual studio code
+-Extension para ejecutar código
+ Instalar code runner 
+- Extensión de python
+
+##crear proyecto de python
+adjuntar una area de trabajo
+
+#para cargar una terminal de python
+en ver->paleta de comandos
+>python:start repl
+#para debuggear es f9 en la linea de código y luego f5
+
+#creando entornos virtuales
+python -m venv my-venv
+#para actvar el entorno
+source my-venv/Scripts/activate
+#en ver->paleta de comandos, >python:select interpreter y seleccionar el entorno virtual
+python -m pip install flask
+python -m pip install streamlit
